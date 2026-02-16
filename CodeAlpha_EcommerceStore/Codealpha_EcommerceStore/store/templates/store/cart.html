@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Cart</title>
+</head>
+<body>
+
+{% extends 'store/base.html' %}
+
+{% block content %}
+
+<h2>Your Shopping Cart 🛒</h2>
+
+{% if items %}
+
+<table class="table table-bordered mt-4">
+    <thead class="table-dark">
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>${{ item.product.price }}</td>
+            <td>
+                <a href="{% url 'update_item' item.product.id 'remove' %}" class="btn btn-sm btn-danger">-</a>
+                {{ item.quantity }}
+                <a href="{% url 'update_item' item.product.id 'add' %}" class="btn btn-sm btn-success">+</a>
+            </td>
+            <td>${{ item.get_total }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="text-end">
+    <h5>Total Items: {{ order.get_cart_items }}</h5>
+    <h4>Grand Total: ${{ order.get_cart_total }}</h4>
+
+    <a href="{% url 'checkout' %}" class="btn btn-primary mt-2">
+        Checkout 💳
+    </a>
+</div>
+
+{% else %}
+
+<p>Your cart is empty.</p>
+
+{% endif %}
+
+{% endblock %}
+
+</body>
+</html>

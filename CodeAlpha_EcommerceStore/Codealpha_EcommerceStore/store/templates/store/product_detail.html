@@ -1,0 +1,30 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ product.image.url }}" class="img-fluid rounded shadow">
+    </div>
+
+    <div class="col-md-6">
+        <h2>{{ product.name }}</h2>
+        <h4 class="text-success mb-3">${{ product.price }}</h4>
+        <p>{{ product.description }}</p>
+
+        <p>Stock: {{ product.stock }}</p>
+
+        {% if user.is_authenticated %}
+            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary">
+                Add to Cart 🛒
+            </a>
+        {% else %}
+            <p>Please login to purchase.</p>
+        {% endif %}
+
+        <br><br>
+        <a href="/" class="btn btn-secondary">⬅ Back to Store</a>
+    </div>
+</div>
+
+{% endblock %}

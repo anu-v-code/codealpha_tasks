@@ -1,0 +1,36 @@
+{% extends 'social/base.html' %}
+
+{% block content %}
+
+{% for post in posts %}
+<div class="post-card">
+
+    <div class="post-header">
+        <div class="avatar">{{ post.author.username|slice:":1"|upper }}</div>
+        <span class="username">@{{ post.author.username }}</span>
+    </div>
+
+    {% if post.image %}
+        <img src="{{ post.image.url }}" class="post-image">
+    {% endif %}
+
+    <div class="post-actions">
+        ❤️ <span>{{ post.like_set.count }}</span>
+    </div>
+
+    <div class="post-caption">
+        <strong>@{{ post.author.username }}</strong> {{ post.caption }}
+    </div>
+
+    <div class="comments">
+        {% for comment in post.comments.all %}
+            <p><b>{{ comment.user.username }}</b> {{ comment.text }}</p>
+        {% empty %}
+            <p class="muted">No comments yet</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% endfor %}
+
+{% endblock %}

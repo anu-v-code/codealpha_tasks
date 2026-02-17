@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MiniSocial</title>
+
+    <link rel="stylesheet" href="{% static 'social/css/style.css' %}">
+</head>
+<body>
+
+<div class="navbar">
+    <h2>📸 MiniSocial</h2>
+    <div>
+        <a href="/">Home</a>
+        <a href="/create/">Create</a>
+        <a href="/logout/">Logout</a>
+    </div>
+</div>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>
+
